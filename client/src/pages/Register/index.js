@@ -1,14 +1,27 @@
 import React from 'react';
-import {Form, Input, Button} from 'antd';
+import {Form, Input, Button, message} from 'antd';
 import {Link} from 'react-router-dom';
+import {RegisterUser} from '../../api/users';
 
 function Register() {
+  const onFinish = async (value) => {
+    try {
+        const response = await RegisterUser(value)
+        if(response.success) {
+            message.success(response.message);
+        }else {
+            message.error(response.message);
+        }
+    }catch(err) {
+        message.error(err.message);
+    }
+  };
   return (
     <>
     <main className='App-header'>
         <h1>Register to Book my show</h1>
         <section className='mw-500 text-center px-3'>
-            <Form layout='vertical'>
+            <Form layout='vertical' onFinish={onFinish}>
                 <Form.Item label="Name" htmlFor='Name' name="name" className='d-block' rules={[{required: true, message: "Name is required"}]} >
                     <Input id='Name' type='text' placeholder='Enter your Name'></Input>
                 </Form.Item>
@@ -24,7 +37,7 @@ function Register() {
                     </Button>
                 </Form.Item>
                 <div>
-                    <p> Already a user? <Link to="/register">Login</Link></p>
+                    <p> Already a user? <Link to="/Login">Login</Link></p>
                 </div>
             </Form>
         </section>
