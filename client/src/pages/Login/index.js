@@ -9,12 +9,13 @@ function Login() {
   const onFinish = async (value) => {
     try {
         const response = await LoginUser(value);
-        if(response.success) {
-            message.success(response.message);
-            localStorage.setItem('token', response.data);
+        const data = await response.json();
+        if(data.success) {
+            message.success(data.message);
+            localStorage.setItem('token', data.data);
             navigate('/');
         }else {
-            message.error(response.message);
+            message.error(data.message);
         }
     }catch(err) {
         message.error(err.message);

@@ -3,18 +3,23 @@ import Login from './pages/Login';
 import Home from "./pages/Home/index";
 import Register from './pages/Register';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/Login' element={<Login/>} />
-            <Route path='/Register' element={<Register />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+              <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>} />
+              <Route path='/Login' element={<Login/>} />
+              <Route path='/Register' element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </Provider>
   );
 }
 

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('./../model/userModel');
+const UserModel = require('./../model/userModel');
 
 
 exports.register = async (req, res) => {
@@ -25,6 +26,7 @@ exports.register = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
+    console.log(req.body);
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
@@ -53,4 +55,16 @@ exports.login = async (req, res) => {
             message: "An error occurred. Please try again later.",
         });
     }
+}
+
+exports.currentUser = async (req,res) => {
+
+        const user = await UserModel.findById(req.body.userId).select("-password");
+
+        res.send({
+            success: true,
+            message: "you are authorized to go to protected route!",
+            data: user
+        });
+
 }
