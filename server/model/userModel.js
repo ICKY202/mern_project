@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'user', 'partner'],
         required: true,
-        default: 'user'
+        default: 'admin'
     }
 });
 const UserModel = mongoose.model("users", userSchema);

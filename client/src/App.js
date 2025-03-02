@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
+import Admin from './pages/Admin/index';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>} />
               <Route path='/Login' element={<Login/>} />
               <Route path='/Register' element={<Register />} />
+              <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
           </Routes>
         </BrowserRouter>
       </div>

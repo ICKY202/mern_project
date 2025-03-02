@@ -17,7 +17,6 @@ function ProtectedRoute({children}) {
         try {
             dispatch(showLoading());
             const response = await getCurrentUser();
-            console.log(response);
             dispatch(setUser(response));
             dispatch(hideLoading());
         }catch(err) {
